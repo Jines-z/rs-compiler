@@ -1,0 +1,13 @@
+{
+  "name": "rs-compiler",
+  "version": "1.0.0",
+  "description": "Provided to the compiler used on rs-cli",
+  "author": "zhengaojin <zhengaojin@live.cn>",
+  "private": false,
+  "license": "MIT",
+  "keywords": [
+    "rs-cli",
+    "react",
+    "react-starter-kit"
+  ]
+}

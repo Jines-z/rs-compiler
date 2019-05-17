@@ -1,0 +1,9 @@
+.DS_Store
+.prettierrc
+.idea
+.vscode
+.prettierrc
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
