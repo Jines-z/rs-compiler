@@ -1,6 +1,6 @@
 {
   "name": "rs-compiler",
-  "version": "1.0.0",
+  "version": "1.0.6",
   "description": "Provided to the compiler used on rs-cli",
   "author": "zhengaojin <zhengaojin@live.cn>",
   "private": false,
