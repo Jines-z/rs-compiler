@@ -43,6 +43,8 @@ const update = (cb) => {
                     console.log(`  Run ${chalk.cyan('npm install rs-compiler@latest -D')} or ${chalk.cyan('yarn add rs-compiler@latest --dev')} to update\n`)
                     process.exit(0)
                 }
+            } else {
+                cb()
             }
         } else {
             console.log(chalk.red('  Request \'NPM\' failed, please try again\n'))
