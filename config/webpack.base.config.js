@@ -7,14 +7,14 @@ const ESLintFormatter     = require('eslint-friendly-formatter')
 const project             = require(`${cwd}/project.config`)
 const babelRC             = require('../babelrc')
 
-const ENV         = project.env
-const GLOBAL      = project.global
-const ESLINT      = project.esLint
-const SRC_DIR     = project.srcDir
-const OUT_DIR     = project.outDir
-const BASE_PATH   = project.basePath
-const FAV_ICON    = project.favicon
-const PUBLIC_PATH = project.publicPath
+const ENV          = project.env
+const GLOBAL       = project.global
+const ESLINT       = project.esLint
+const SRC_DIR      = project.srcDir
+const OUT_DIR      = project.outDir
+const BASE_PATH    = project.basePath
+const HTML_OPTIONS = project.html
+const PUBLIC_PATH  = project.publicPath
 
 const fonts = [
     ['otf'  , 'font/opentype'],
@@ -122,12 +122,12 @@ const base = {
         new HtmlWebpackPlugin({
             template: 'index.html',
             inject  : true,
-            fav : FAV_ICON,
             minify  : {
                 removeComments: ENV === 'production',
                 collapseWhitespace: ENV === 'production',
                 removeAttributeQuotes: ENV === 'production',
-            }
+            },
+            ...HTML_OPTIONS
         }),
         new IncludeAssetsPlugin({
             assets: [{
