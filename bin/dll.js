@@ -10,7 +10,8 @@ rimraf(DLL_DIR, err => {
     if (err) throw err
     webpack(config).run((err, stats) => {
         if (err || stats.hasErrors()) {
-            console.log(chalk.red('  Webpack compilation failed\n'))
+            console.log(err || stats.compilation.errors)
+            console.log(chalk.red('\n  Webpack compilation failed\n'))
         } else {
             console.log(chalk.green(`  Webpack compiled successfully\n`))
         }
