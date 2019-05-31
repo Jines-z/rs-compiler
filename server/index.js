@@ -6,7 +6,7 @@ const address              = require('address')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const compress             = require('compression')
-const proxy                = require('http-proxy-middleware')
+const proxy                = require('../lib/Proxy')
 const webpackConfig        = require('../config/webpack.dev.config')
 const project              = require(`${cwd}/project.config`)
 
@@ -44,7 +44,7 @@ const hotMiddleware = webpackHotMiddleware(COMPILER, {
 })
 
 for (let x in PROXY_TABLE) {
-    APP.use(proxy(x, PROXY_TABLE[x]))
+    APP.use(new proxy(x, PROXY_TABLE[x]))
 }
 
 APP.use(devMiddleware)
