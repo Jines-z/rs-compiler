@@ -19,9 +19,6 @@ const PROXY_TABLE = project.proxy
 APP.use(compress())
 
 const devMiddleware = webpackDevMiddleware(COMPILER, {
-    quiet   : false,
-    noInfo  : false,
-    lazy    : false,
     headers : {'Access-Control-Allow-Origin': '*'},
     stats   : 'errors-only',
 })
