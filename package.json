@@ -1,7 +1,7 @@
 {
   "name": "rs-compiler",
-  "version": "1.1.11",
-  "description": "Provided to the compiler used on rs-cli",
+  "version": "1.2.0",
+  "description": "Provided to the compiler used on rs-admin-cli",
   "author": "zhengaojin <zhengaojin@live.cn>",
   "private": false,
   "license": "MIT",
@@ -9,7 +9,7 @@
     "rs-compiler": "./bin/index.js"
   },
   "keywords": [
-    "rs-cli",
+    "rs-admin-cli",
     "rs-compiler",
     "react",
     "react-starter-kit",

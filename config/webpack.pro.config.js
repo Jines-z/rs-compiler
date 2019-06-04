@@ -12,10 +12,11 @@ const project              = require(`${cwd}/project.config`)
 const SRC_DIR   = project.srcDir
 const BASE_PATH = project.basePath
 const THEME     = project.theme
+const RELATIVE  = project.relative
 
 const production = {
     output: {
-        filename: 'js/[name].[chunkhash:5].js'
+        filename: `${RELATIVE ? '' : 'JS/'}[name].[chunkhash:5].js`
     },
     mode   : 'production',
     devtool: false,
@@ -79,7 +80,7 @@ const production = {
             minimal: false
         }),
         new MiniCssExtractPlugin({
-            filename: 'css/[name].[chunkhash:5].css'
+            filename: `${RELATIVE ? '' : 'CSS/'}[name].[chunkhash:5].css`
         }),
         new CopyWebpackPlugin([{
             from: path.join(BASE_PATH, 'dll'),

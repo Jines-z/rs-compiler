@@ -10,6 +10,7 @@ const babelRC             = require('../babelrc')
 const ENV          = project.env
 const GLOBAL       = project.global
 const ESLINT       = project.esLint
+const RELATIVE     = project.relative
 const SRC_DIR      = project.srcDir
 const OUT_DIR      = project.outDir
 const BASE_PATH    = project.basePath
@@ -43,7 +44,7 @@ const base = {
         main: ['@babel/polyfill', SRC_DIR]
     },
     output: {
-        publicPath: PUBLIC_PATH,
+        publicPath: RELATIVE ? './' : PUBLIC_PATH,
         path: OUT_DIR
     },
     resolve: {
@@ -71,7 +72,7 @@ const base = {
                     loader : 'url-loader',
                     options: {
                         limit: 10000,
-                        name : 'images/[name].[hash:5].[ext]'
+                        name : `${RELATIVE ? '' : 'images/'}[name].[hash:5].[ext]`
                     }
                 }
             },
@@ -81,7 +82,7 @@ const base = {
                     loader : 'url-loader',
                     options: {
                         limit: 10000,
-                        name : 'media/[name].[hash:5].[ext]'
+                        name : `${RELATIVE ? '' : 'media/'}[name].[hash:5].[ext]`
                     }
                 }
             },
@@ -93,7 +94,7 @@ const base = {
                         use : {
                             loader : 'url-loader',
                             options: {
-                                name    : 'fonts/[name].[hash:5].[ext]',
+                                name    : `${RELATIVE ? '' : 'fonts/'}[name].[hash:5].[ext]`,
                                 limit   : 10000,
                                 mimetype: item[1]
                             }
