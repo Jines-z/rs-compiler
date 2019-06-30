@@ -36,9 +36,7 @@ const production = {
                         loader : 'postcss-loader',
                         options: {
                             plugins: [
-                                PostCssPresetEnv({
-                                    browsers: ['> 1%', 'last 5 version', 'ie > 8']
-                                }),
+                                PostCssPresetEnv(),
                                 CssNaNo({
                                     reduceIdents: false,
                                     autoprefixer: false
@@ -80,7 +78,7 @@ const production = {
             minimal: false
         }),
         new MiniCssExtractPlugin({
-            filename: `${RELATIVE ? '' : 'CSS/'}[name].[chunkhash:5].css`
+            filename: `${RELATIVE ? '' : 'css/'}[name].[chunkhash:5].css`
         }),
         new CopyWebpackPlugin([{
             from: path.join(BASE_PATH, 'dll'),
