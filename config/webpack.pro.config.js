@@ -16,7 +16,7 @@ const RELATIVE  = project.relative
 
 const production = {
     output: {
-        filename: `${RELATIVE ? '' : 'JS/'}[name].[chunkhash:5].js`
+        filename: `${RELATIVE ? '' : 'js/'}[name].[chunkhash:5].js`
     },
     mode   : 'production',
     devtool: false,
