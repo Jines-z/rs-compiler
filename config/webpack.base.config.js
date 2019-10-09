@@ -17,15 +17,6 @@ const BASE_PATH    = project.basePath
 const HTML_OPTIONS = project.html
 const PUBLIC_PATH  = project.publicPath
 
-const fonts = [
-    ['otf'  , 'font/opentype'],
-    ['ttf'  , 'application/octet-stream'],
-    ['eot'  , 'application/vnd.ms-fontobject'],
-    ['svg'  , 'image/svg+xml'],
-    ['woff' , 'application/font-woff'],
-    ['woff2', 'application/font-woff2']
-]
-
 const ESLintRule = () => ({
     test: /(\.jsx|\.js)$/,
     use : {
@@ -52,13 +43,13 @@ const base = {
             '@': SRC_DIR
         },
         modules: [SRC_DIR, 'node_modules'],
-        extensions: ['.js', '.jsx', '.json', '.less', '.css']
+        extensions: ['.js', '.jsx', '.tsx', '.ts', '.json', '.less', '.scss', '.css']
     },
     module: {
         rules: [
             ...(ESLINT ? [ESLintRule()] : []),
             {
-                test: /\.(js|jsx)$/,
+                test: /\.(j|t)sx?$/,
                 use : {
                     loader : 'babel-loader?cacheDirectory',
                     options: babelRC
@@ -67,7 +58,7 @@ const base = {
                 exclude: /node_modules/
             },
             {
-                test: /\.(png|PNG|jpe?g|JPG|gif|GIF)(\?.*)?$/,
+                test: /\.(png|PNG|jpe?g|JPG|gif|GIF|svg)(\?.*)?$/,
                 use : {
                     loader : 'url-loader',
                     options: {
@@ -86,23 +77,16 @@ const base = {
                     }
                 }
             },
-            ...(() => {
-                let rules = []
-                fonts.forEach((item) => {
-                    rules.push({
-                        test: new RegExp(`\\.${item[0]}$`),
-                        use : {
-                            loader : 'url-loader',
-                            options: {
-                                name    : `${RELATIVE ? '' : 'fonts/'}[name].[hash:5].[ext]`,
-                                limit   : 10000,
-                                mimetype: item[1]
-                            }
-                        }
-                    })
-                })
-                return rules
-            })()
+            {
+                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 10000,
+                        name : `${RELATIVE ? '' : 'fonts/'}[name].[hash:5].[ext]`
+                    }
+                }
+            }
         ]
     },
     performance: {

@@ -8,7 +8,8 @@ module.exports = {
                     browsers: ['last 2 versions', 'ie > 8']
                 }
             }
-        ]
+        ],
+        '@babel/preset-typescript'
     ],
     plugins: [
         ['@babel/plugin-transform-runtime'],
