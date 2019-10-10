@@ -18,7 +18,7 @@ const HTML_OPTIONS = project.html
 const PUBLIC_PATH  = project.publicPath
 
 const ESLintRule = () => ({
-    test: /(\.jsx|\.js)$/,
+    test: /\.(j|t)sx?$/,
     use : {
         loader : 'eslint-loader?cacheDirectory',
         options: {
