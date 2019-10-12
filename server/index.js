@@ -20,7 +20,7 @@ APP.use(compress())
 
 const devMiddleware = webpackDevMiddleware(COMPILER, {
     headers : {'Access-Control-Allow-Origin': '*'},
-    stats   : 'errors-only',
+    stats   : 'errors-warnings',
 })
 
 devMiddleware.waitUntilValid(() => {
