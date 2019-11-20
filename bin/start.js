@@ -1,3 +1,3 @@
-const { PORT, HOST } = require('../server')
+const server = require('../server'), { APP, PORT, HOST } = server
 
-server.APP.listen(PORT, HOST)
+APP.listen(PORT, HOST)
