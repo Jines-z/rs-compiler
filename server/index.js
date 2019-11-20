@@ -53,5 +53,6 @@ APP.use(express.static(project.basePath))
 
 module.exports = {
     APP,
-    PORT
+    PORT,
+    HOST
 }
