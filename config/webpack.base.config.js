@@ -16,6 +16,7 @@ const OUT_DIR      = project.outDir
 const BASE_PATH    = project.basePath
 const HTML_OPTIONS = project.html
 const PUBLIC_PATH  = project.publicPath
+const CONFIG       = project.config || {}
 
 const ESLintRule = () => ({
     test: /\.(j|t)sx?$/,
@@ -32,18 +33,24 @@ const ESLintRule = () => ({
 
 const base = {
     entry: {
-        main: ['@babel/polyfill', SRC_DIR]
+        main: ['@babel/polyfill', SRC_DIR],
+        ...(CONFIG.entry || {})
     },
     output: {
         publicPath: RELATIVE ? './' : PUBLIC_PATH,
-        path: OUT_DIR
+        path: OUT_DIR,
+        ...(CONFIG.output || {})
     },
     resolve: {
         alias: {
             '@': SRC_DIR
         },
         modules: [SRC_DIR, 'node_modules'],
-        extensions: ['.js', '.jsx', '.tsx', '.ts', '.json', '.less', '.scss', '.css']
+        extensions: ['.js', '.jsx', '.tsx', '.ts', '.json', '.less', '.scss', '.css'],
+        ...(CONFIG.resolve || {})
+    },
+    externals: {
+        ...(CONFIG.externals || {})
     },
     module: {
         rules: [
@@ -86,11 +93,13 @@ const base = {
                         name : `${RELATIVE ? '' : 'fonts/'}[name].[hash:5].[ext]`
                     }
                 }
-            }
+            },
+            ...((CONFIG.module && CONFIG.module.rules) ? CONFIG.module.rules : [])
         ]
     },
     performance: {
-        hints: false
+        hints: false,
+        ...(CONFIG.performance || {})
     },
     plugins: [
         new webpack.DefinePlugin((() => {
@@ -121,7 +130,8 @@ const base = {
                 globPath: path.join(BASE_PATH, 'dll')
             }],
             append: false
-        })
+        }),
+        ...(CONFIG.plugins || [])
     ]
 }
 

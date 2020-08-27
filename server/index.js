@@ -6,7 +6,7 @@ const address              = require('address')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const compress             = require('compression')
-const proxy                = require('../lib/Proxy')
+const proxy                = require('../lib/http-proxy-middleware')
 const webpackConfig        = require('../config/webpack.dev.config')
 const project              = require(`${cwd}/project.config`)
 
@@ -15,6 +15,7 @@ const APP         = express()
 const PORT        = project.port
 const HOST        = project.host
 const PROXY_TABLE = project.proxy
+const OPEN        = project.open
 
 APP.use(compress())
 
@@ -34,8 +35,9 @@ devMiddleware.waitUntilValid(() => {
     } else {
         host = HOST || 'localhost'
     }
-
-    opn(`http://${host}:${PORT}`)
+    if (OPEN) {
+        opn(`http://${host}:${PORT}`)
+    }
 })
 
 const hotMiddleware = webpackHotMiddleware(COMPILER, {
@@ -43,8 +45,10 @@ const hotMiddleware = webpackHotMiddleware(COMPILER, {
     log  : false
 })
 
-for (let x in PROXY_TABLE) {
-    APP.use(new proxy(x, PROXY_TABLE[x]))
+if (PROXY_TABLE) {
+    for (let x in PROXY_TABLE) {
+        APP.use(new proxy(x, PROXY_TABLE[x]))
+    }
 }
 
 APP.use(devMiddleware)
