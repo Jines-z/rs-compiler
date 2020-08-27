@@ -1,10 +1,12 @@
-const cwd     = process.cwd()
-const webpack = require('webpack')
-const merge   = require('webpack-merge')
-const base    = require('./webpack.base.config')
-const project = require(`${cwd}/project.config`)
-const SRC_DIR = project.srcDir
-const THEME   = project.theme
+const cwd      = process.cwd()
+const webpack  = require('webpack')
+const chalk    = require('chalk')
+const merge    = require('webpack-merge')
+const Progress = require('progress-bar-webpack-plugin')
+const base     = require('./webpack.base.config')
+const project  = require(`${cwd}/project.config`)
+const SRC_DIR  = project.srcDir
+const THEME    = project.theme
 
 const development = {
     entry: {
@@ -33,7 +35,13 @@ const development = {
     },
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new Progress({
+            width: 30,
+            format: `  ${chalk.gray('｢wbp｣')}: [:bar] ` + chalk.green(':percent') + ' (:elapsed seconds)',
+            clear: true,
+            summary: false
+        })
     ]
 }
 

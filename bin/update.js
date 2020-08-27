@@ -23,7 +23,7 @@ const exec = (cmd, cb) => {
 }
 
 const update = (cb) => {
-    request({ url: 'https://registry.npmjs.org/rs-compiler' }, (err, res, body) => {
+    request({ url: 'https://registry.npm.taobao.org/rs-compiler' }, (err, res, body) => {
         if (!err && res.statusCode === 200) {
             const latest_v = JSON.parse(body)['dist-tags'].latest
             const local_v = packageJson.devDependencies['rs-compiler'].replace(/^\^|@|~/, '')
