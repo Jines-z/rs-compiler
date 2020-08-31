@@ -38,6 +38,7 @@ devMiddleware.waitUntilValid(() => {
     if (OPEN) {
         opn(`http://${host}:${PORT}`)
     }
+    process.send && process.send('wdm-cb')
 })
 
 const hotMiddleware = webpackHotMiddleware(COMPILER, {
