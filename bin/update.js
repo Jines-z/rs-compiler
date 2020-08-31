@@ -28,7 +28,7 @@ const update = (cb) => {
             const latest_v = JSON.parse(body)['dist-tags'].latest
             const local_v = packageJson.devDependencies['rs-compiler'].replace(/^\^|@|~/, '')
             if (semver.lt(local_v, latest_v)) {
-                const text = `Updating rs-compiler ${chalk.gray(local_v)} \u279C ${chalk.green(latest_v)}`
+                const text = `Updating rs-compiler ${chalk.gray(local_v)} ~ ${chalk.green(latest_v)}`
                 if (yarnLock && npmLock) {
                     console.log(chalk.red('  Found that \'package-lock.json\' and \'yarn.lock\' exist at the same time\n'))
                     process.exit(0)
