@@ -38,7 +38,7 @@ const development = {
         new webpack.HotModuleReplacementPlugin(),
         new Progress({
             width: 30,
-            format: `  ${chalk.gray('｢wbp｣')}: [:bar] ` + chalk.green(':percent') + ' (:elapsed seconds)',
+            format: `  ${chalk.gray('｢wdm｣')}: [:bar] ` + chalk.green(':percent') + ' (:elapsed seconds)',
             clear: true,
             summary: false
         })
