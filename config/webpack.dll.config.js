@@ -3,9 +3,10 @@ const webpack    = require('webpack')
 const WebpackBar = require('webpackbar')
 const path       = require('path')
 const project    = require(`${cwd}/project.config`)
-const VENDOR     = project.vendor
-const BASE_PATH  = project.basePath
-const DLL_DIR    = project.dllDir
+
+const VENDOR    = project.vendor
+const BASE_PATH = project.basePath
+const DLL_DIR   = project.dllDir
 
 module.exports = {
     entry: {

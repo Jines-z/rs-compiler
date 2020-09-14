@@ -4,9 +4,8 @@ const chalk   = require('chalk')
 const rimraf  = require('rimraf')
 const config  = require('../config/webpack.pro.config')
 const project = require(`${cwd}/project.config`)
-const OUT_DIR = project.outDir
 
-rimraf(OUT_DIR, err => {
+rimraf(project.outDir, err => {
     if (err) throw err
     webpack(config).run((err, stats) => {
         if (err || stats.hasErrors()) {

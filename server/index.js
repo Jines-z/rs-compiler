@@ -6,7 +6,8 @@ const address              = require('address')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const compress             = require('compression')
-const proxy                = require('../lib/http-proxy-middleware')
+const proxyMiddleware      = require('../lib/Http-Proxy-Middleware')
+const clearCMD             = require('../lib/ClearCMD')
 const webpackConfig        = require('../config/webpack.dev.config')
 const project              = require(`${cwd}/project.config`)
 
@@ -14,14 +15,18 @@ const COMPILER    = webpack(webpackConfig)
 const APP         = express()
 const PORT        = project.port
 const HOST        = project.host
-const PROXY_TABLE = project.proxy
+const PROXY       = project.proxy
 const OPEN        = project.open
 
 APP.use(compress())
 
+COMPILER.hooks.done.tap('rs-compiler', () => {
+    clearCMD()
+})
+
 const devMiddleware = webpackDevMiddleware(COMPILER, {
     headers : {'Access-Control-Allow-Origin': '*'},
-    stats   : 'errors-warnings',
+    stats   : 'errors-warnings'
 })
 
 devMiddleware.waitUntilValid(() => {
@@ -38,6 +43,9 @@ devMiddleware.waitUntilValid(() => {
     if (OPEN) {
         opn(`http://${host}:${PORT}`)
     }
+    COMPILER.hooks.watchRun.tap('rs-compiler', () => {
+        clearCMD()
+    })
     process.send && process.send('wdm-cb')
 })
 
@@ -46,9 +54,9 @@ const hotMiddleware = webpackHotMiddleware(COMPILER, {
     log  : false
 })
 
-if (PROXY_TABLE) {
-    for (let x in PROXY_TABLE) {
-        APP.use(new proxy(x, PROXY_TABLE[x]))
+if (PROXY) {
+    for (let x in PROXY) {
+        APP.use(new proxyMiddleware(x, PROXY[x]))
     }
 }
 

@@ -4,9 +4,8 @@ const rimraf  = require('rimraf')
 const chalk   = require('chalk')
 const config  = require('../config/webpack.dll.config')
 const project = require(`${cwd}/project.config`)
-const DLL_DIR = project.dllDir
 
-rimraf(DLL_DIR, err => {
+rimraf(project.dllDir, err => {
     if (err) throw err
     webpack(config).run((err, stats) => {
         if (err || stats.hasErrors()) {

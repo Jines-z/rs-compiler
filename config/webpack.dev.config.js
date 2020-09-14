@@ -5,8 +5,9 @@ const merge    = require('webpack-merge')
 const Progress = require('progress-bar-webpack-plugin')
 const base     = require('./webpack.base.config')
 const project  = require(`${cwd}/project.config`)
-const SRC_DIR  = project.srcDir
-const THEME    = project.theme
+
+const SRC_DIR = project.srcDir
+const THEME   = project.theme
 
 const development = {
     entry: {
