@@ -1,6 +1,6 @@
 const cwd        = process.cwd()
 const webpack    = require('webpack')
-const WebpackBar = require('webpackbar')
+const webpackBar = require('webpackbar')
 const path       = require('path')
 const project    = require(`${cwd}/project.config`)
 
@@ -22,7 +22,7 @@ module.exports = {
         hints: false
     },
     plugins: [
-        new WebpackBar({
+        new webpackBar({
             minimal: false,
             compiledIn: false
         }),

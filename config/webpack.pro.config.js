@@ -1,10 +1,10 @@
 const cwd                  = process.cwd()
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const WebpackBar           = require('webpackbar')
-const CopyWebpackPlugin    = require('copy-webpack-plugin')
+const miniCssExtractPlugin = require('mini-css-extract-plugin')
+const webpackBar           = require('webpackbar')
+const copyWebpackPlugin    = require('copy-webpack-plugin')
 const merge                = require('webpack-merge')
-const CssNaNo              = require('cssnano')
-const PostCssPresetEnv     = require('postcss-preset-env')
+const cssNaNo              = require('cssnano')
+const postCssPresetEnv     = require('postcss-preset-env')
 const path                 = require('path')
 const base                 = require('./webpack.base.config')
 const project              = require(`${cwd}/project.config`)
@@ -25,7 +25,7 @@ const production = {
             {
                 test: /(\.less|\.css)$/,
                 use :[
-                    MiniCssExtractPlugin.loader,
+                    miniCssExtractPlugin.loader,
                     {
                         loader : 'css-loader',
                         options: {
@@ -36,8 +36,8 @@ const production = {
                         loader : 'postcss-loader',
                         options: {
                             plugins: [
-                                PostCssPresetEnv(),
-                                CssNaNo({
+                                postCssPresetEnv(),
+                                cssNaNo({
                                     reduceIdents: false,
                                     autoprefixer: false
                                 })
@@ -63,24 +63,32 @@ const production = {
             minSize    : 30000,
             minChunks  : 1,
             cacheGroups: {
+                common_js: {
+                    name     : 'common',
+                    test     : /\.js$/,
+                    chunks   : 'all',
+                    minSize  : 1,
+                    minChunks: 2,
+                    priority : 1
+                },
                 vendor: {
                     name    : 'vendor',
                     test    : /[\\/]node_modules[\\/]/,
                     chunks  : 'all',
-                    priority: -10,
+                    priority: 10,
                     enforce : true
                 }
             }
         }
     },
     plugins: [
-        new WebpackBar({
+        new webpackBar({
             minimal: false
         }),
-        new MiniCssExtractPlugin({
+        new miniCssExtractPlugin({
             filename: `${RELATIVE ? '' : 'css/'}[name].[chunkhash:5].css`
         }),
-        new CopyWebpackPlugin([{
+        new copyWebpackPlugin([{
             from: path.join(BASE_PATH, 'dll'),
             to  : path.join(BASE_PATH, 'dist', 'dll')
         }])

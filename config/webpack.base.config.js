@@ -1,9 +1,8 @@
 const cwd                 = process.cwd()
 const webpack             = require('webpack')
 const path                = require('path')
-const HtmlWebpackPlugin   = require('html-webpack-plugin')
-const IncludeAssetsPlugin = require('html-webpack-include-assets-plugin')
-const ESLintFormatter     = require('eslint-friendly-formatter')
+const htmlWebpackPlugin   = require('html-webpack-plugin')
+const includeAssetsPlugin = require('html-webpack-include-assets-plugin')
 const project             = require(`${cwd}/project.config`)
 const babelRC             = require('../babelrc')
 
@@ -21,9 +20,9 @@ const CONFIG       = project.config || {}
 const ESLintRule = () => ({
     test: /\.(j|t)sx?$/,
     use : {
-        loader : 'eslint-loader?cacheDirectory',
+        loader : 'eslint-loader',
         options: {
-            formatter: ESLintFormatter
+            cache: true
         }
     },
     enforce: 'pre',
@@ -57,10 +56,13 @@ const base = {
             ...(ESLINT ? [ESLintRule()] : []),
             {
                 test: /\.(j|t)sx?$/,
-                use : {
-                    loader : 'babel-loader?cacheDirectory',
-                    options: babelRC
-                },
+                use : [,
+                    'cache-loader',
+                    {
+                        loader : 'babel-loader',
+                        options: babelRC
+                    }
+                ],
                 include: SRC_DIR,
                 exclude: /node_modules/
             },
@@ -113,7 +115,7 @@ const base = {
             context : BASE_PATH,
             manifest: path.resolve(BASE_PATH, 'dll', 'manifest.json')
         }),
-        new HtmlWebpackPlugin({
+        new htmlWebpackPlugin({
             template: 'index.html',
             inject  : true,
             minify  : {
@@ -123,7 +125,7 @@ const base = {
             },
             ...HTML_OPTIONS
         }),
-        new IncludeAssetsPlugin({
+        new includeAssetsPlugin({
             assets: [{
                 path    : 'dll',
                 glob    : '*.js',

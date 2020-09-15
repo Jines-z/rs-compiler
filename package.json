@@ -1,6 +1,6 @@
 {
   "name": "rs-compiler",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Provided to the compiler used on rs-admin-cli.",
   "author": "zhengaojin <zhengaojin@live.cn>",
   "private": false,
@@ -10,7 +10,7 @@
   },
   "keywords": [
     "rs-admin-cli",
-    "rs-compiler",
+    "compiler",
     "react",
     "mobx",
     "redux",
@@ -36,6 +36,7 @@
     "babel-eslint": "^8.2.6",
     "babel-loader": "^8.0.6",
     "babel-plugin-import": "^1.11.2",
+    "cache-loader": "^4.1.0",
     "chalk": "^2.4.1",
     "compression": "^1.7.4",
     "copy-webpack-plugin": "^5.0.3",
@@ -44,7 +45,6 @@
     "eslint": "^5.16.0",
     "eslint-config-react": "^1.1.7",
     "eslint-config-standard": "^12.0.0",
-    "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.1.2",
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-node": "^7.0.1",

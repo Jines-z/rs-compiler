@@ -31,6 +31,7 @@ const update = (cb) => {
             if (semver.lt(local_v, latest_v)) {
                 const text = `Updating \'rs-compiler\' ${chalk.gray(local_v)} ~ ${chalk.green(latest_v)}`
                 if (yarnLock && npmLock) {
+                    Spinner.stop()
                     console.log(chalk.red('  Found that \'package-lock.json\' and \'yarn.lock\' exist at the same time\n'))
                     process.exit(0)
                 } else if (yarnLock) {

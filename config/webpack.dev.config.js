@@ -2,7 +2,7 @@ const cwd      = process.cwd()
 const webpack  = require('webpack')
 const chalk    = require('chalk')
 const merge    = require('webpack-merge')
-const Progress = require('progress-bar-webpack-plugin')
+const progress = require('progress-bar-webpack-plugin')
 const base     = require('./webpack.base.config')
 const project  = require(`${cwd}/project.config`)
 
@@ -37,7 +37,7 @@ const development = {
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new Progress({
+        new progress({
             width: 30,
             format: `  ${chalk.gray('｢wdm｣')}: [:bar] ` + chalk.green(':percent') + ' (:elapsed seconds)',
             clear: true,
