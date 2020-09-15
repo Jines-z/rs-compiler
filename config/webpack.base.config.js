@@ -56,7 +56,7 @@ const base = {
             ...(ESLINT ? [ESLintRule()] : []),
             {
                 test: /\.(j|t)sx?$/,
-                use : [,
+                use : [
                     'cache-loader',
                     {
                         loader : 'babel-loader',
