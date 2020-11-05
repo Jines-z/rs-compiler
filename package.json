@@ -1,6 +1,6 @@
 {
   "name": "rs-compiler",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "Provided to the compiler used on rs-admin-cli.",
   "author": "zhengaojin <zhengaojin@live.cn>",
   "private": false,
@@ -72,6 +72,7 @@
     "typescript": "^3.6.3",
     "url-loader": "^1.1.2",
     "webpack": "^4.41.0",
+    "webpack-bundle-analyzer": "^2.13.1",
     "webpack-cli": "^3.3.9",
     "webpack-dev-middleware": "^3.7.2",
     "webpack-hot-middleware": "^2.25.0",

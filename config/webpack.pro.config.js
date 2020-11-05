@@ -1,6 +1,7 @@
 const cwd                  = process.cwd()
 const miniCssExtractPlugin = require('mini-css-extract-plugin')
 const webpackBar           = require('webpackbar')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const copyWebpackPlugin    = require('copy-webpack-plugin')
 const merge                = require('webpack-merge')
 const cssNaNo              = require('cssnano')
@@ -13,6 +14,7 @@ const SRC_DIR   = project.srcDir
 const BASE_PATH = project.basePath
 const THEME     = project.theme
 const RELATIVE  = project.relative
+const BAPlugin  = project.BAPlugin
 
 const production = {
     output: {
@@ -93,6 +95,12 @@ const production = {
             to  : path.join(BASE_PATH, 'dist', 'dll')
         }])
     ]
+}
+
+if (BAPlugin) {
+    production.plugins.push(
+        new BundleAnalyzerPlugin()
+    )
 }
 
 module.exports = merge(base, production)

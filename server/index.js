@@ -5,11 +5,11 @@ const opn                  = require('opn')
 const address              = require('address')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
-const compress             = require('compression')
-const proxyMiddleware      = require('../lib/Http-Proxy-Middleware')
-const clearCMD             = require('../lib/ClearCMD')
-const webpackConfig        = require('../config/webpack.dev.config')
-const project              = require(`${cwd}/project.config`)
+const compress        = require('compression')
+const proxyMiddleware = require('../lib/Http-Proxy-Middleware')
+const clearCMD        = require('../lib/ClearCMD')
+const webpackConfig   = require('../config/webpack.dev.config')
+const project         = require(`${cwd}/project.config`)
 
 class Server {
     constructor() {

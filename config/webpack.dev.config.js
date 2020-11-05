@@ -14,7 +14,7 @@ const development = {
         main: ['webpack-hot-middleware/client?path=./__webpack_hmr']
     },
     mode   : 'development',
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'module-eval-source-map',
     module : {
         rules: [
             {
